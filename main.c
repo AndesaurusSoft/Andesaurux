@@ -1,8 +1,9 @@
 #include "include/unistd.h"
 #include "include/stdlib.h"
 #include "include/stdio.h"
+#include "include/time.h"
 /*
-*  This is a test of fork() system call in Andesaurux
+*  This is a test of fork() system call and displaydatetime() app in Andesaurux
 */
 int main()
 {
@@ -10,8 +11,8 @@ int main()
         {
                 int pid = fork();
                 sleep(1);
-                timespent++;
                 printf("PID=%d, Happy Birthday %d!\n", pid, pid);
         }
+        displayDateTime();
         exit(0);
 }
