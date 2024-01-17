@@ -1,0 +1,3 @@
+# Contribution
+TO CONTRIBUTE, YOU NEED TO FORK THIS REPO AND AFTER YOU HAVE DONE ALL THE CHANGES, CREATE PULL REQUEST
+IF YOU DON'T KNOW C LANGUAGE, YOU CAN LEARN THE BASICS FROM MY LESSONS(They are on russian language, but you can just put this lessons into translator)
