@@ -37,6 +37,6 @@ section kernel
     kernel_load:
 
     kernel_entry:
-    call main
+    call init
 
     hlt
