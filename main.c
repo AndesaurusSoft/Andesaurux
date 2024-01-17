@@ -1,7 +1,7 @@
-#include "include/unistd.h"
-#include "include/stdlib.h"
-#include "include/stdio.h"
-#include "include/time.h"
+#include "usr/include/unistd.h"
+#include "usr/include/stdlib.h"
+#include "usr/include/stdio.h"
+#include "usr/include/time.h"
 /*
 *  This is a test of fork() system call and displaydatetime() app in Andesaurux
 */

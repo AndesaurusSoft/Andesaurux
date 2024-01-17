@@ -1,9 +1,9 @@
 /*
 *  gitcc means "Git cloner and compiler", it's not compatible with some programms, but i think, most of the programs will be compatible with this
 */
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "usr/include/string.h"
+#include "usr/include/stdio.h"
+#include "usr/include/stdlib.h"
 int main(int argc, char** argv)
 {
         char *url = argv[1];
