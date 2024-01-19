@@ -1,5 +1,6 @@
+; boot/boot.asm
 bits 16
-; Copyright (C) 2024 Anatoliy6463
+
 section bootloader
     cli
     xor ax, ax
@@ -35,8 +36,8 @@ load_error:
 
 section kernel
     kernel_load:
-
+    
     kernel_entry:
-    call init
-
+    call main
+    
     hlt

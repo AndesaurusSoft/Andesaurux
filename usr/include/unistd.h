@@ -6,3 +6,4 @@
 int fork();
 int exit(time_t timer);
 int sleep(time_t sec);
+int cat(const char *filename);
