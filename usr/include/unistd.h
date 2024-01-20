@@ -7,3 +7,4 @@ int fork();
 int exit(time_t timer);
 int sleep(time_t sec);
 int cat(const char *filename);
+int mount(const char *source, const char *target, const char *filesystemtype, unsigned long mountflags, const void *data);     
