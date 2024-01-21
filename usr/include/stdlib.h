@@ -1,3 +1,4 @@
 #include "time.h"
-extern int exit(time_t timer);
-extern int system(const char *cmd);
+exit(time_t timer);
+system(const char *cmd);
+malloc(unsigned nbytes);
