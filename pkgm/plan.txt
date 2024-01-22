@@ -1,0 +1,53 @@
+Plan for pkgm package manager:
+1.  Downloading only the source code, to make sure, that all software you use is FLOSS
+2.  Installing the dependencies(also source code)
+3.  Compiling
+4.  make install
+
+I want to make it look like this:
+
+$ su root
+Password:
+$ pkgm install program
+These packages will be installed:
+    program dependency dependency2
+It will take 0.5 MB of space on disk.
+
+Are you sure?[Y/n]  y
+
+Installing dependency...
+######################## 100%
+
+make
+
+gcc -o code.o dependencycode.c
+gcc -o code2.o dependencycode2.c
+gcc -o code3.o dependencycode3.c
+
+make install
+
+
+Installing dependency2...
+######################## 100%
+
+make
+
+gcc -o code2.o dependencycode2.c
+gcc -o code22.o dependencycode22.c
+gcc -o code23.o dependencycode23.c
+
+
+Installing program...
+######################## 100%
+
+make
+
+gcc -o code.o code.c
+gcc -o code2.o code2.c
+gcc -o code3.o code3.c
+
+
+make install
+Done!
+$ program
+Welcome to program that you just installed!
