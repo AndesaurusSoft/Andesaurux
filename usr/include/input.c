@@ -6,7 +6,8 @@
 int getchar(void) 
 {
         int c;
-        asm volatile(
+        asm volatile
+        (
                 "mov $3, %%eax\n\t"
                 "int $0x80\n\t"
                 "mov %%eax, %0"
@@ -19,7 +20,8 @@ int getchar(void)
 int fgetc(FILE *f) 
 {
     int c;
-    asm volatile(
+    asm volatile
+    (
         "mov $3, %%eax\n\t"
         "mov %%ebx, %1\n\t"
         "int $0x80\n\t"

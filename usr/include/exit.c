@@ -4,7 +4,8 @@
 int exit(time_t timer)
 {
     sleep(timer);
-    asm volatile(
+    asm volatile
+    (
         "mov $1, %%eax\n\t"
         "mov %0, %%ebx\n\t"
         "int $0x80"

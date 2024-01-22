@@ -1,0 +1,1 @@
+/usr/src is a directory, where source codes for programs are stored

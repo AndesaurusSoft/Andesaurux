@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdarg.h"
+#include "unistd.h"
 /*
 *   Copyright (C) 2024 Anatoliy6463
 */
@@ -55,4 +56,13 @@ int fputc(int c, FILE *f) {
 int putc(int c)
 {
         putchar(c);
+}
+int cat(const char *filename) 
+{
+    FILE *f = fopen(filename, "r");
+    int c;
+    while ((c = fgetc(f)) != EOF) 
+    {
+        putchar(c);    
+    }
 }

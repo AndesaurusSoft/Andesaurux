@@ -1,0 +1,1 @@
+This is a terminal emulator for UNIX-like operating systems
