@@ -43,7 +43,7 @@ deleten(char *str)
 main()
 {
     char buffer[1024];
-    char currentdir[1024] = "~/Andesaurux/home";
+    char currentdir[1024] = "/home";
     for (;;)
     {
         printf("$ ");
@@ -77,14 +77,13 @@ main()
         {
             ls(currentdir);         
         }
-        else if (strcmp(buffer, "create_file") == 0)
+        else if (strcmp(buffer, "touch") == 0)
         {
             char filename[1024];
             printf("Enter filename: ");
             fgets(filename, 1024, stdin);
             deleten(filename);
-            FILE *f = fopen(filename, "w");
-            fclose(f);
+			touch(filename);
         }
         else if (strcmp(buffer, "app_launcher") == 0)
         {
@@ -94,6 +93,14 @@ main()
             deleten(filename);
             system(filename);
         }
+		else if (strcmp(buffer, "cat") == 0)
+		{
+			puts("Enter filename:\t");
+			char filename[1024];
+			fgets(filename, 1024, stdin);
+			deleten(filename);
+			cat(filename);i
+		}
         else
         {
             fprintf(stderr, "%s, command not found\n\007", buffer);
