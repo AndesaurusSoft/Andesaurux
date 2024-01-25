@@ -25,4 +25,5 @@ extern int putc(int c);
 extern int fclose(FILE *f);
 extern FILE *fopen(const char *filename, const char *mode);
 extern int fflush(FILE *f);
+extern int perror(const char *str);
 #endif // STDIO_H

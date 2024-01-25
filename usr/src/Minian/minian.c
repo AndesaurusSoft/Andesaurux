@@ -1,109 +1,114 @@
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <stdlib.h>
-#include <dirent.h>
-deleten();
-displayDateTime();
-ls(const char *directory);
-displayDateTime() 
+#define minian_RL_BUFSIZE 1024
+void minian_loop(void)
 {
-    time_t currentTime;
-    struct tm *localTime;
-    char buffer[80];
-    currentTime = time(NULL);
-    localTime = localtime(&currentTime);
-    strftime(buffer, sizeof(buffer), "Today's date: %Y-%m-%d\nCurrent time: %H:%M:%S", localTime);
-    printf("%s\n", buffer);
+  char *line;
+  char **args;
+  int status;
+
+  do 
+  {
+    printf("> ");
+    line = minian_read_line();
+    args = minian_split_line(line);
+    status = minian_execute(args);
+
+    free(line);
+    free(args);
+  } while (status);
 }
-ls(const char *directory) 
+char *minian_read_line(void)
 {
-    DIR *dir;
-    struct dirent *entry;
-    dir = opendir(directory);
-    if (dir == NULL) 
-    { 
-        printf("Error opening directory\n");
-        return;
-    }
-    while ((entry = readdir(dir)) != NULL) 
+  char *line = NULL;
+  int64_t bufsize = 0; // have getline allocate a buffer for us
+
+  if (getline(&line, &bufsize, stdin) == -1){
+    if (feof(stdin)) {
+      exit(EXIT_SUCCESS);  // We recieved an EOF
+    } 
+    else  
     {
-        printf("%s\n", entry->d_name);
+      fputs("read error\n", stderr);
+      exit(EXIT_FAILURE);
     }
-    closedir(dir);
+  }
+  return line;
 }
-deleten(char *str) 
+#define minian_TOK_BUFSIZE 64
+#define minian_TOK_DELIM " \t\r\n\a"
+char **minian_split_line(char *line)
 {
-    int len = strlen(str);
-    if (len > 0 && str[len-1] == '\n') 
+  int bufsize = minian_TOK_BUFSIZE, position = 0;
+  char **tokens = malloc(bufsize * sizeof(char*));
+  char *token;
+
+  if (!tokens) 
+  {
+    fprintf(stderr, "minian: allocation error\n");
+    exit(EXIT_FAILURE);
+  }
+
+  token = strtok(line, minian_TOK_DELIM);
+  while (token != NULL) 
+  {
+    tokens[position] = token;
+    position++;
+
+    if (position >= bufsize) 
     {
-        str[len-1] = '\0';
+      bufsize += minian_TOK_BUFSIZE;
+      tokens = realloc(tokens, bufsize * sizeof(char*));
+      if (!tokens) 
+      {
+        fprintf(stderr, "minian: allocation error\n");
+        exit(EXIT_FAILURE);
+      }
     }
+
+    token = strtok(NULL, minian_TOK_DELIM);
+  }
+  tokens[position] = NULL;
+  return tokens;
 }
-main()
+int minian_launch(char **args)
 {
-    char buffer[1024];
-    char currentdir[1024] = "/home";
-    for (;;)
+  pid_t pid, wpid;
+  int status;
+
+  pid = fork();
+  if (pid == 0) 
+  {
+    // Child process
+    if (execvp(args[0], args) == -1) 
     {
-        printf("$ ");
-        fgets(buffer, 1024, stdin);
-        deleten(buffer);
-        if (strcmp(buffer, "exit") == 0)
-        {
-            exit(0);
-        }
-        else if (strcmp(buffer, "clear") == 0)
-        {
-            for (int y = 0; y < 1000; y++)
-            {
-                for (int x = 0; x < 1000; x++)
-                {
-                    printf(" ");
-                }
-            }
-            getchar();
-        }
-        else if (strcmp(buffer, "help") == 0)
-        {
-            puts("exit\tclear\nhelp\tdate\n");
-            getchar();
-        }
-        else if (strcmp(buffer, "date") == 0)
-        {
-            displayDateTime();
-        }
-        else if (strcmp(buffer, "ls") == 0)
-        {
-            ls(currentdir);         
-        }
-        else if (strcmp(buffer, "touch") == 0)
-        {
-            char filename[1024];
-            printf("Enter filename: ");
-            fgets(filename, 1024, stdin);
-            deleten(filename);
-			touch(filename);
-        }
-        else if (strcmp(buffer, "app_launcher") == 0)
-        {
-            char filename[1024];
-            printf("Enter filename: ");
-            fgets(filename, 1024, stdin);
-            deleten(filename);
-            system(filename);
-        }
-		else if (strcmp(buffer, "cat") == 0)
-		{
-			puts("Enter filename:\t");
-			char filename[1024];
-			fgets(filename, 1024, stdin);
-			deleten(filename);
-			cat(filename);i
-		}
-        else
-        {
-            fprintf(stderr, "%s, command not found\n\007", buffer);
-        }
+      fprintf(stderr, "%s: command not found\n", args[0]);
     }
+    exit(EXIT_FAILURE);
+  } 
+  else if (pid < 0) 
+  {
+    perror("fork");
+  } 
+  else 
+  {
+    // Parent process
+    do {
+      wpid = waitpid(pid, &status, WUNTRACED);
+    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+  }
+  return 1;
+}
+int minian_cd(char **args)
+{
+  if (args[1] == NULL) 
+  {
+    fprintf(stderr, "minian: expected argument to \"cd\"\n");
+  } 
+  else 
+  {
+    if (chdir(args[1]) != 0) 
+    {
+      perror("cd");
+    }
+  }
+  return 1;
 }

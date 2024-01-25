@@ -17,13 +17,20 @@ int main()
         // Child process
         execl("/usr/bin/minian/main.o", "init", (char *)NULL);
         pid = rand()%CLOCKS_PER_SEC+2;
+        waitpid(pid, NULL, 0);
         if (pid == 1)
         {
-            fputs("execl", stderr);
+            panic();
         }
     }
     else
     {
         return 0;
     }
+}
+int turn_off(void)
+{
+    puts("Turning off the system...\n");
+
+    return 0;
 }
