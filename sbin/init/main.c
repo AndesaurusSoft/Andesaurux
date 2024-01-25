@@ -19,7 +19,7 @@ int main()
         pid = rand()%CLOCKS_PER_SEC+2;
         if (pid == 1)
         {
-            perror("execl");
+            fputs("execl", stderr);
         }
     }
     else
