@@ -6,7 +6,8 @@ typedef time_t clock_t;
 /*
 *   Copyright (C) 2024 Anatoliy6463
 */
-struct tm {
+struct tm 
+{
     int tm_sec;   // seconds after the minute (0 - 60)
     int tm_min;   // minutes after the hour (0 - 59)
     int tm_hour;  // hours since midnight (0 - 23)

@@ -3,7 +3,7 @@
 /*
 *   Copyright (C) 2024 Anatoliy6463
 */
-int getchar(void) 
+getchar() 
 {
         int c;
         asm volatile
@@ -17,7 +17,8 @@ int getchar(void)
         );
         return c;
 }
-int fgetc(FILE *f) 
+fgetc(f)
+FILE *f; 
 {
     int c;
     asm volatile
@@ -32,7 +33,8 @@ int fgetc(FILE *f)
     );
     return c;
 }
-int scanf(const char *format, ...) 
+scanf(format, ...) 
+const char *format;
 {
         va_list args;
         va_start(args, format);

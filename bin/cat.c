@@ -1,11 +1,15 @@
 #include <stdio.h>
-main(int argc, char **argv)
+main(argc, argv)
+char **argv;
 {
     FILE *f = fopen(argv[1], "r");
     int c;
-    while ((c = fgetc(f)) != EOF)
+    do 
     {
         putchar(c);
-    }
+        c = fgetc(f);
+    } while(c != EOF);
+    putchar('\n');
+    fclose(f);
     return(0);
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
-main(int argc, char **argv)
+main(argc, argv)
+char **argv;
 {
     FILE *f = fopen(argv[1], "w");
     fclose(f);

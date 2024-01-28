@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-main(int argc, char **argv)
+main(argc, argv)
+char **argv;
 {
     char name[512] = "man-pages/";
     strcat(name, argv[1]);

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
-int main()
+main()
 {
     puts("Launching the system...\n");
     pid_t pid = fork();
@@ -14,7 +14,7 @@ int main()
     }
     else if (pid == 0)
     {
-        // Child process
+        /* Child process */
         execl("/usr/bin/minian/main.o", "init", (char *)NULL);
         pid = rand()%CLOCKS_PER_SEC+2;
         waitpid(pid, NULL, 0);
@@ -28,9 +28,10 @@ int main()
         return 0;
     }
 }
-int turn_off(void)
+turn_off()
 {
     puts("Turning off the system...\n");
-
+    idle();
+    exit(0);
     return 0;
 }
