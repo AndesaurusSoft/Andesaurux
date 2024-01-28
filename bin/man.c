@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+/* 2. Gonna */
 main(argc, argv)
 char **argv;
 {

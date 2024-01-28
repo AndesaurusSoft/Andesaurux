@@ -1,4 +1,5 @@
 #include <stdio.h>
+/* 1.  Never */
 main(argc, argv)
 char **argv;
 {

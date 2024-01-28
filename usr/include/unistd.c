@@ -2,7 +2,9 @@
 #include "unistd.h"
 #include "stdarg.h"
 #include "stdlib.h"
-execl(const char *path, const char *arg, ...)
+execl(path, arg, ...)
+const char *path;
+const char *arg;
 {
     va_list args;
     va_start(args, arg);
@@ -19,34 +21,36 @@ execl(const char *path, const char *arg, ...)
     argv[i] = NULL;
     return execv(path, argv);
 }
-execv(const char *path, char *const argv[])
+execv(path, argv)
+const char *path;
+const char **argv;
 {
-    // Count the number of arguments
     int argc = 0;
     while (argv[argc] != NULL) {
         argc++;
     }
 
-    // Create a new array for the arguments including the program path
     char **new_argv = (char **)malloc((argc + 1) * sizeof(char *));
     if (new_argv == NULL) {
-        return -1; // Return an error if memory allocation fails
+        return -1;
     }
 
-    // Copy the program path and arguments into the new array
+    /* Copy the program path and arguments into the new array */
     for (int i = 0; i <= argc; i++) {
         new_argv[i] = argv[i];
     }
 
-    // Execute the new program
+    /* Execute the new program */
     int result = execvp(path, new_argv);
 
-    // Free the memory allocated for the new arguments array
+    /* Free the memory allocated for the new arguments array */
     free(new_argv);
 
     return result;
 }
-execvp(char *path, char *argv)
+execvp(path, argv)
+const char *path;
+const char *argv;
 {
     // Count the number of arguments
     int argc = 0;
@@ -76,10 +80,11 @@ execvp(char *path, char *argv)
 
     return result;
 }
+
 typedef struct 
 {
-    struct Header *ptr; // Next block if on free list
-    unsigned size; // Size of this block
+    struct Header *ptr;
+    unsigned size;
 } Header;
 
 int fork() 
@@ -97,7 +102,9 @@ int fork()
     return pid;
 }
 
-int mkdir(const char *path, mode_t mode, int pid) 
+int mkdir(path, mode, pid) 
+const char *path;
+mode_t mode;
 {
     asm volatile
     (
@@ -113,22 +120,22 @@ int mkdir(const char *path, mode_t mode, int pid)
     );
     return pid;
 }
-
-int idle(void)
+#define MAX 32767
+idle()
 {
     while (1)
     {
-        sleep(1);
+        sleep(MAX);
     }
     return 0;
 }
-
-int panic(const char *str)
+panic(s)
+char *s;
 {
-    printf("Kernel panic: %s\n", str);
-    idle();
+    printf(" panic: %s\n", str);
+    for(;;)
+        idle();
 }
-
 int shutdown(char *args)
 {
     if (strcmp(args, "now") == 0)

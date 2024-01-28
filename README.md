@@ -11,7 +11,7 @@ I think, i should make microkernel, because they are less complicated and if the
   Minimal resource consumption
   Maximum performance
   Support hardware
+# I START DEVELOPING FROM SCRATCH
 ## Please, fork this repo as much as possible
 ### And write Makefile for it ;D
 <img src="logo.png" width="1024"/>
-# I START DEVELOPING FROM SCRATCH
