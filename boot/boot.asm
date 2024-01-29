@@ -1,4 +1,3 @@
-; boot/boot.asm
 bits 16
 
 section bootloader
@@ -31,6 +30,30 @@ load_error:
     mov al, 'r'
     int 0x10
     mov al, '!'
+    int 0x10
+    mov al, ' '
+    int 0x10
+    mov al, 'B'
+    int 0x10
+    mov al, 'o'
+    int 0x10
+    mov al, 'o'
+    int 0x10
+    mov al, 't'
+    int 0x10
+    mov al, ' '
+    int 0x10
+    mov al, 'f'
+    int 0x10
+    mov al, 'a'
+    int 0x10
+    mov al, 'i'
+    int 0x10
+    mov al, 'l'
+    int 0x10
+    mov al, 'e'
+    int 0x10
+    mov al, 'd'
     int 0x10
     hlt
 
