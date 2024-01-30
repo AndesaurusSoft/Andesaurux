@@ -4,7 +4,7 @@ NASM = nasm
 CFLAGS = -Wall -Werror
 LDFLAGS = -lm
 
-SRC_DIR = src
+SRC_DIR = usr/src
 BOOT_DIR = boot
 INIT_DIR = sbin/init
 
