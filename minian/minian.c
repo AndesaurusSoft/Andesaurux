@@ -15,7 +15,7 @@ int analise(char *cmd, char *args)
     if (strcmp(cmd, "cat") == 0)
       {
 	FILE *f = fopen(args, "r");
-	int c = NULL;
+	int c;
 	while ((c = fgetc(f)) != EOF)
 	  {
 	    putchar(c);
@@ -63,6 +63,7 @@ int analise(char *cmd, char *args)
       }
     else
       puts("Command not found!\n");
+    return (0);
   }/*I plan creating more commands, but that's all for today*/
 int main()
 {

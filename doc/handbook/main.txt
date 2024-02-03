@@ -1,0 +1,6 @@
+This is a Andesaurux OS handbook where you can get information about it
+List:
+    1. whatisit.txt (Entry)
+    2. dwndcmpl.txt (Downloading and compiling)
+    3. installation.txt (Installation)
+    4. pkgm.txt (pkgm usage)

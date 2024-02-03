@@ -4,11 +4,11 @@ NASM = nasm
 CFLAGS = -Wall -Werror
 LDFLAGS = -lm
 
-SRC_DIR = usr/src
+SRC_DIR = minian
 BOOT_DIR = boot
 INIT_DIR = sbin/init
 
-SRC_FILES = $(SRC_DIR)/Minian/minian.c
+SRC_FILES = $(SRC_DIR)/minian.c
 BOOT_FILES = $(BOOT_DIR)/boot.asm
 INIT_FILES = $(INIT_DIR)/init.c
 
