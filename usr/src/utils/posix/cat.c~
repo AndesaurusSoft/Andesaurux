@@ -1,0 +1,24 @@
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+  int c;
+  FILE *f;
+  for (int i = 1; i <= argc; i++)
+    {
+      f = fopen(argv[argc], "r");
+      if (!f)
+	{
+	  puts("Error! No such file!\n");
+	  return (0);
+	}
+      while (c != EOF)
+	{
+	  c = getc(f);
+	  putchar(c);
+	}
+    }
+  fclose(f);
+  c = 0;
+  putchar('\n');
+  return (0);
+}
