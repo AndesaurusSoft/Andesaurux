@@ -1,0 +1,5 @@
+Andesaurux is a fully free OS that is aimed at easiest package management and freedom.
+1.	   Andesaurux is a OS
+2.	   It's fully free
+3.	   It is protected by GNU GPL
+4.	   There is a pkgm, so you can download apps
