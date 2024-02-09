@@ -2,25 +2,31 @@
 /* Calculator for Andesaurux operating system */
 int main(void)
 {
-  long long a, b, c = 0;
+  double a, b = 0;
+  short int c = 0;
   puts("Enter two numbers:\t");
-  scanf("%d %d", &a, &b);
+  scanf("%lg %lg", &a, &b);
   puts("Enter operation symbol:\t");
   getchar();
   c = getchar();
   switch(c)
     {
       case '+':
-	printf("%d+%d=%d", a, b, a+b);
+	printf("%g+%g=%g", a, b, a+b);
 	break;
       case '-':
-	printf("%d-%d=%d", a, b, a-b);
+	printf("%g-%g=%g", a, b, a-b);
 	break;
       case '*':
-	printf("%d*%d=%d", a, b, a*b);
+	printf("%g*%g=%g", a, b, a*b);
 	break;
       case '/':
-	printf("%d/%d=%d", a, b, a/b);
+	if (b == 0)
+	  {
+	    puts("YOU CANT DIVIDE BY ZERO!\n");
+	    return (1);
+	  }
+	printf("%g/%g=%g", a, b, a/b);
 	break;
       default:
 	printf("%c - WTF?!", c);
