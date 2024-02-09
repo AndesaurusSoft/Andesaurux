@@ -121,20 +121,19 @@ mode_t mode;
     return pid;
 }
 #define MAX 32767
-idle()
+halt()
 {
-    while (1)
-    {
-        sleep(MAX);
-    }
-    return 0;
+  asm volatile
+    (
+     "int $0x80"
+     "hlt"
+    );
 }
 panic(s)
 char *s;
 {
-    printf(" panic: %s\n", str);
-    for(;;)
-        idle();
+    printf("panic: %s\n", s);
+    halt();
 }
 int shutdown(char *args)
 {
