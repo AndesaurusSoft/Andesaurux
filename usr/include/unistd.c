@@ -132,7 +132,7 @@ halt()
 panic(s)
 char *s;
 {
-    printf("panic: %s\n", s);
+    printf("Kernel panic: %s\n", s);
     halt();
 }
 int shutdown(char *args)
@@ -141,18 +141,17 @@ int shutdown(char *args)
     {
         puts("Shutting down...\n");
         puts("It is now save to power off\n");
-        idle();
+        halt();
     }
     return 0;
 }
-
 int sleep(time_t seconds) 
 {
     clock_t end_time = clock() + seconds * CLOCKS_PER_SEC;
 
     while (clock() < end_time) 
     {
-        idle();
+        halt();
     }
 }
 
@@ -169,5 +168,34 @@ int waitpid(int pid, int *status, int options)
         : "=r" (*status)
         : "r" (pid), "r" (options), "r" (status)
         : "%eax", "%ebx", "%ecx", "%edx"
+    );
+}
+chdir(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $6, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
+    );
+}
+
+int umount(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $7, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
     );
 }
