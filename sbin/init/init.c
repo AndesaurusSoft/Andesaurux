@@ -9,13 +9,13 @@ main()
     srand(time(NULL));
     if (pid == -1)
     {
-        perror("fork");
+        panic("Fork failed\n");
         return -1;
     }
     else if (pid == 0)
     {
         /* Child process */
-        execl("/usr/bin/minian/main.o", "init", (char *)NULL);
+        execl("/sbin/daemons/testd.o", "init", (char *)NULL);
         pid = rand()%CLOCKS_PER_SEC+2;
         waitpid(pid, NULL, 0);
         if (pid == 1)
