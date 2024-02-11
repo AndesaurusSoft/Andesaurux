@@ -1,5 +1,5 @@
 bits 16
-
+; I will translate this to ARM assembly :)
 section bootloader
     cli
     xor ax, ax
@@ -24,7 +24,7 @@ load_error:
     mov al, 'r'
     int 0x10
     mov al, 'r'
-    int 0x10
+    int 0x1
     mov al, 'o'
     int 0x10
     mov al, 'r'

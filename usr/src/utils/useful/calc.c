@@ -11,29 +11,27 @@ int exponent(int a, int b)
 /* Calculator for Andesaurux operating system */
 int main(void)
 {
-  long long a, b, c = 0;
+  double a, b = 0;
+  short int c = 0;
   puts("Enter two numbers:\t");
-  scanf("%d %d", &a, &b);
+  scanf("%lg %lg", &a, &b);
   puts("Enter operation symbol:\t");
   getchar();
   c = getchar();
   switch(c)
     {
       case '+':
-	      printf("%d+%d=%d", a, b, a+b);
-	      break;
+	printf("%d+%d=%d", a, b, a+b);
+	break;
       case '-':
-	      printf("%d-%d=%d", a, b, a-b);
-	      break;
+	printf("%d-%d=%d", a, b, a-b);
+	break;
       case '*':
-	      printf("%d*%d=%d", a, b, a*b);
-	      break;
+	printf("%d*%d=%d", a, b, a*b);
+	break;
       case '/':
-	      printf("%d/%d=%d", a, b, a/b);
-	      break;
-      case '^':
-            printf("%d^%d=%d", a, b, exponent(a, b));
-            break;
+	printf("%d/%d=%d", a, b, a/b);
+	break;
       default:
 	      printf("%c - WTF?!", c);
 	      break;
