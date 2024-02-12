@@ -1,9 +1,0 @@
-#include <stdio.h>
-#include "hq9p.h"
-int main(int argc, char **argv)
-{
-  FILE *f = fopen(argv[1], "r");
-  char source[1024];
-  fgets(source, 1023, f);
-  hq9p(source);
-}
