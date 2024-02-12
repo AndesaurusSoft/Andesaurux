@@ -9,7 +9,7 @@ main()
     srand(time(NULL));
     if (pid == -1)
     {
-        panic("Fork failed\n");
+        puts("Fork failed\n");
         return -1;
     }
     else if (pid == 0)
@@ -20,7 +20,8 @@ main()
         waitpid(pid, NULL, 0);
         if (pid == 1)
         {
-            panic();
+	  puts("WTH HAPPENED?!\n");
+	  return (-1);
         }
     }
     else
@@ -31,7 +32,6 @@ main()
 turn_off()
 {
     puts("Turning off the system...\n");
-    idle();
     exit(0);
     return 0;
 }

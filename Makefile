@@ -1,7 +1,6 @@
 CC = gcc
 NASM = nasm
 
-CFLAGS = -Wall -Werror
 LDFLAGS = -lm
 
 SRC_DIR = usr/src
@@ -17,7 +16,7 @@ OBJ_FILES = $(MINIAN:.c=.o) $(BOOT_FILES:.asm=.o) $(INIT_FILES:.c=.o)
 all: minian boot init
 
 minian: $(MINIAN)
-	$(CC) $(CFLAGS) -c $^ -o $(MINIAN:.c=.o)
+	$(CC) -c $^ -o $(MINIAN:.c=.o)
 	$(CC) $(OBJ_FILES) -o minian $(LDFLAGS)
 
 boot: $(BOOT_FILES)

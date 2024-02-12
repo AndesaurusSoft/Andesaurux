@@ -58,7 +58,52 @@ load_error:
     hlt
 
 section kernel
-    kernel_load:
+main:
+	mov ah, 0x0E
+	int 0x10
+	mov al, 'A'
+	int 0x10
+	mov al, 'n'
+	int 0x10
+        mov al, 'd'
+	int 0x10
+        mov al, 'e'
+	int 0x10
+        mov al, 's'
+	int 0x10
+        mov al, 'a'
+	int 0x10
+        mov al, 'u'
+	int 0x10
+        mov al, 'r'
+	int 0x10
+        mov al, 'u'
+	int 0x10
+        mov al, 'x'
+	int 0x10
+        mov al, ' '
+	int 0x10
+        mov al, 'B'
+	int 0x10
+        mov al, 'o'
+	int 0x10
+        mov al, 'o'
+	int 0x10
+        mov al, 't'
+	int 0x10
+        mov al, 'l'
+	int 0x10
+        mov al, 'o'
+	int 0x10
+        mov al, 'a'
+	int 0x10
+        mov al, 'd'
+	int 0x10
+        mov al, 'e'
+	int 0x10
+        mov al, 'r'
+	
+kernel_load:
     
     kernel_entry:
     call main
