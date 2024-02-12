@@ -29,3 +29,4 @@ int read(fd, buf, count);
 int write(fd, buf, count);
 int open(file, how, ...);
 int del(path);
+int clear();

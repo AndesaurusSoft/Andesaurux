@@ -139,6 +139,7 @@ int shutdown(char *args)
 {
     if (strcmp(args, "now") == 0)
     {
+        clear();
         puts("Shutting down...\n");
         puts("It is now save to power off\n");
         halt();
@@ -330,3 +331,7 @@ char *path;
     );
 }
 
+int clear()
+{
+    printf("\033[2J\033[1;1H");
+}
