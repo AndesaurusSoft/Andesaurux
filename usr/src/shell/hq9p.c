@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "hq9p.h"
-void open(char *name)
+void hq9open(char *name)
 {
   FILE *f = fopen(name, "r");
   char source[1024];

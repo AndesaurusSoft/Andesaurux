@@ -335,3 +335,8 @@ int clear()
 {
     printf("\033[2J\033[1;1H");
 }
+
+int time()
+{
+    printf("%d", time(0));
+}

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <dirent.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include "hq9p.c"
@@ -7,14 +9,25 @@
 * Minian will be more lighweight than bash and i will write doc for it.
 */
 /*
- * Fun fact: this code is written entirely in GNU Emacs :D
- */
+* Fun fact: this code is written entirely in GNU Emacs :D
+*/
 /*Analyser*/
+void ls (char *path, int a, int b);
 int analise(char *cmd, char *args)
   {
     if (strcmp(cmd, "cat") == 0)
       {
+	if (args[0] == '\0')
+	  {
+	    puts("Error! No input files\n");
+	    return (1);
+	  }
 	FILE *f = fopen(args, "r");
+	if (!f)
+	  {
+	    puts("Error! File doesn't exist\n");
+	    return (1);
+	  }
 	int c;
 	while ((c = fgetc(f)) != EOF)
 	  {
@@ -38,8 +51,12 @@ int analise(char *cmd, char *args)
 	  }
 	else
 	  {
-	    puts("cat\thelp\ttouch\thq9p\n");
+	    puts("cat\thelp\ttouch\thq9p\nls\tcd\texit\n");
 	  }
+      }
+    else if (strcmp(cmd, "info") == 0)
+      {
+	puts("Minian v0.0.1\nCopyright (C) 2024 AnatoliyL\nMinian is free software\nMinian is a shell for UNIX-like OS like Andesaurux\n");
       }
     else if (strcmp(cmd, "touch") == 0)
       {
@@ -59,28 +76,76 @@ int analise(char *cmd, char *args)
     else if (strcmp(cmd, "hq9p") == 0)
       {
 	char *filename = args;
-	open(filename);
+	hq9open(filename);
+      }
+    else if (strcmp(cmd, "cd") == 0)
+      {
+	chdir(args);
+      }
+    else if (strcmp(cmd, "ls") == 0)
+      {
+	if (args[0] == '\0')
+	  {
+	    ls(".",0,0);
+	  }
+	else
+	  ls(args,0,0);
+      }
+    else if (strcmp(cmd, "exit") == 0)
+      {
+	exit(0);
       }
     else
-      puts("Command not found!\n");
+      puts("Command not found!\nType \"Help\" for list of commands\n");
     return (0);
-  }/*I plan creating more commands, but that's all for today*/
+  }
+void ls(char *path, int a, int b)
+{
+  struct dirent *d;
+  DIR *dh = opendir(path);
+  if (!dh)
+    {
+      perror("Directory doesn't exist\n");
+    }
+  else
+    {
+      while ((d = readdir(dh)) != NULL)
+	{
+		if (!a && d->d_name[0] == '.')
+			continue;
+		printf("%s  ", d->d_name);
+		if(b) printf("\n");
+	}
+    }
+}
+/*I plan creating more commands, but that's all for today*/
+void loop(char *s, char *cmd, char *args)
+{
+  int argsstart = 0;
+  puts("$\t");
+  fgets(s, 1023, stdin);
+  if (s[0] != '\n')
+    {
+      char *token = strtok(s, " \n");
+      if (token != NULL) 
+        {
+          strcpy(cmd, token);
+          token = strtok(NULL, "\n");
+          if (token != NULL) 
+            {
+              strcpy(args, token);
+            }
+        }
+      analise(cmd, args);
+    }
+  putchar('\n');
+}
 int main()
 {
-  /*This is test for minian commands*/
-  char cmd[256];
-  puts("Enter a command:\t");
-  char args[256];
-  fgets(cmd, 255, stdin);
-  if ((strlen(cmd) > 0) && (cmd[strlen (cmd) - 1] == '\n'))
-            cmd[strlen (cmd) - 1] = '\0';
-
-  puts("Enter arguments for command:\t");
-  fgets(args, 255, stdin);
-  
-  if ((strlen(args) > 0) && (args[strlen (args) - 1] == '\n'))
-            args[strlen (args) - 1] = '\0';
-
-  analise(cmd, args);
+  char s[1024] = {0};
+  char cmd[1024] = {0};
+  char args[1024] = {0};
+  for (;;)
+    loop(s, cmd, args);
   return (0);
 }
