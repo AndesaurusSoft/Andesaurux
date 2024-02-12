@@ -199,3 +199,134 @@ char *path;
         : "%eax", "%ebx"
     );
 }
+
+int rename(from, to)
+char *from;
+char *to;
+{
+    asm volatile
+    (
+        "mov $8, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "mov %1, %%ecx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %2"
+        : "=r" (to)
+        : "r" (from), "r" (to)
+        : "%eax", "%ebx", "%ecx"
+    );
+}
+
+int close(fd)
+FILE *fd;
+{
+    asm volatile
+    (
+        "mov $9, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (fd)
+        : "r" (fd)
+        : "%eax", "%ebx"
+    );
+}
+
+int creat(path, mode)
+char *path;
+mode_t mode;
+{
+    if (mode != 0777 || mode != 0666 || mode != 0333 || mode != 0222)
+    {
+        fprintf(stderr, "Mode must be 0777 or 0666 or 0333 or 0222\n");
+        exit(1);
+    }
+    FILE *f = fopen(path, "w");
+    fclose(f);
+}
+
+int mknod(path, mode, addr)
+char *path;
+mode_t mode;
+mode_t addr;
+{
+    if (mode != 0777 || mode != 0666 || mode != 0333 || mode != 0222)
+    {
+        fprintf(stderr, "Mode must be 0777 or 0666 or 0333 or 0222\n");
+        exit(1);
+    }
+    asm volatile
+    (
+        "mov $11, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "mov %1, %%ecx\n\t"
+        "mov %2, %%edx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %3"
+        : "=r" (path)
+        : "r" (path), "r" (mode), "r" (addr)
+        : "%eax", "%ebx", "%ecx", "%edx"
+    );
+}
+
+int close(fd)
+FILE *fd;
+{
+    asm volatile
+    (
+        "mov $9, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (fd)
+        : "r" (fd)
+        : "%eax", "%ebx"
+    );
+}
+
+int read(fd, buffer, count)
+FILE *fd;
+char *buffer;
+int count;
+{
+    fgets(buffer, count, fd);
+}
+
+int write(fd, buffer, count)
+FILE *fd;
+char *buffer;
+int count;
+{
+    for (int i = 0; i < count; i++)
+        fputc(buffer[i], fd);
+}
+
+int rename(from, to)
+char *from;
+char *to;
+{
+    FILE *o = fopen(from, "r");
+    FILE *n = fopen(to, "w");
+    int c;
+    while ((c = fgetc(o)) != EOF)
+        fputc(c, n);
+    fclose(o);
+    fclose(n);
+    delete(from);
+}
+
+int del(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $10, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
+    );
+}
+
