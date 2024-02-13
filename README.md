@@ -11,4 +11,4 @@ Development of fully free OS, which will compatible with UNIX
 Minimal resource consumption 
 Maximum performance 
 Hardware support
-<img_title="Logo of Andesaurux Operating System" src="logo.png">
+<img src="logo.ong" alt="logo" width="1024"/>
