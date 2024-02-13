@@ -11,4 +11,4 @@ Development of fully free OS, which will compatible with UNIX
 Minimal resource consumption 
 Maximum performance 
 Hardware support
-<img src="logo.ong" alt="logo" width="1024"/>
+<img src="logo.png" alt="logo" width="1024"/>
