@@ -1,6 +1,10 @@
 #include <stdio.h>
 int exponent(int a, int b)
 {
+      if (b == 0)
+      {
+            return (1);
+      }
       int c = a;
       for (int i = 1; i < b; i++)
       {
@@ -32,9 +36,11 @@ int main(void)
       case '/':
 	printf("%d/%d=%d", a, b, a/b);
 	break;
+      case '^':
+      printf("%d^%d=%d", a, b, exponent(a, b));
       default:
-	      printf("%c - WTF?!", c);
-	      break;
+	printf("%c - WTF?!", c);
+	break;
       
     }
   putchar('\n');
