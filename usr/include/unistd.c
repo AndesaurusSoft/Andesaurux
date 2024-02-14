@@ -443,12 +443,20 @@ int infiniteloop()
     }
 }
 
-int oops(pid, fmt)
+int oops(pid, fmt, num)
 char *fmt;
 int pid;
+int num;
 {
-    printf("Kernel oops!\nCaused by PID: %d\nIt will be killed.\nPlease, restart the computer!\n", pid);
-    kill(pid, 9);
-    printf("Error message: %s\n", fmt);
-    halt();
+    if (num > 1)
+    {
+        panic(); // It broke so many times, time for kernel panic!
+    }
+    else 
+    {
+        printf("Kernel oops!\nCaused by PID: %d\nIt will be killed.\nPlease, restart the computer!\n", pid);
+        kill(pid, 9);
+        printf("Error message: %s\n", fmt);
+        halt();
+    }
 }

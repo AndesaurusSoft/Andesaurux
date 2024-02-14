@@ -37,4 +37,4 @@ int rmdir(path);
 int print(str);
 int infiniteloop();
 int panic(fmt);
-int oops(pid, fmt);
+int oops(pid, fmt, num);
