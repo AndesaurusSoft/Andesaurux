@@ -338,5 +338,117 @@ int clear()
 
 int time()
 {
-    printf("%d", time(0));
+    printf("%d", time(NULL));
+}
+
+int chroot(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $13, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
+    );
+}
+
+int kill(pid, sig)
+int pid;
+int sig;
+{
+    asm volatile
+    (
+        "mov $15, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "mov %1, %%ecx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %2"
+        : "=r" (pid)
+        : "r" (pid), "r" (sig)
+        : "%eax", "%ebx", "%ecx"
+    );
+}
+
+int rmdir(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $14, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
+    );
+}
+
+int mount(source, target, filesystemtype, mountflags, data)
+char *source;
+char *target;
+char *filesystemtype;
+int mountflags;
+char *data;
+{
+    asm volatile
+    (
+        "mov $15, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "mov %1, %%ecx\n\t"
+        "mov %2, %%edx\n\t"
+        "mov %3, %%esi\n\t"
+        "mov %4, %%edi\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %5"
+        : "=r" (source)
+        : "r" (source), "r" (target), "r" (filesystemtype), "r" (mountflags), "r" (data)
+        : "%eax", "%ebx", "%ecx", "%edx", "%esi", "%edi"
+    );
+}
+
+int umount(path)
+char *path;
+{
+    asm volatile
+    (
+        "mov $16, %%eax\n\t"
+        "mov %0, %%ebx\n\t"
+        "int $0x80\n\t"
+        "mov %%eax, %1"
+        : "=r" (path)
+        : "r" (path)
+        : "%eax", "%ebx"
+    );
+}
+
+int print(str)
+char *str;
+{
+    while(*str)
+    {
+        putchar(*str);
+    }
+}
+
+int infiniteloop()
+{
+    for (;;)
+    {
+        print("LOOP\n");
+    }
+}
+
+int oops(pid, fmt)
+char *fmt;
+int pid;
+{
+    printf("Kernel oops!\nCaused by PID: %d\nIt will be killed.\nPlease, restart the computer!\n", pid);
+    kill(pid, 9);
+    printf("Error message: %s\n", fmt);
+    halt();
 }
