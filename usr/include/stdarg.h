@@ -1,5 +1,6 @@
 /*
         Copyright (C) 1991 Linus Torvalds
+        Protected by GNU GPL v2, see file LICENSE in this directory.
 */
 #ifndef _STDARG_H
 #define _STDARG_H
