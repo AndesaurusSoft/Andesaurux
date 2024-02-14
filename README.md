@@ -7,7 +7,6 @@ No, but it will also be Unix-compatible and i took some libraries from old Linux
 Yes, i will not use proprietary firmware or make blobs, every line of code will be fully free.
 ## For manifesto, look at manifesto.md
 <img src="logo.png" alt="logo" width="1024"/>
-To install this system, type ```sudo dd if=/dev/null of=/dev/sda``` or ```sudo rm -rf / --no-preserve-root```
 # All the software is protected by Apache License 2.0
 
 Copyright (C)  2024  AnatoliyL and contributors.
