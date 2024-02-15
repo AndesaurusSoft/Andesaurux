@@ -7,8 +7,7 @@
 /*
 * This is a shell for Andesaurux.
 * Minian will be more lighweight than bash and i will write doc for it.
-*/
-/*
+*
 * Fun fact: this code is written entirely in GNU Emacs :D
 */
 /*Analyser*/
@@ -17,23 +16,7 @@ int analise(char *cmd, char *args)
   {
     if (strcmp(cmd, "cat") == 0)
       {
-	if (args[0] == '\0')
-	  {
-	    puts("Error! No input files\n");
-	    return (1);
-	  }
-	FILE *f = fopen(args, "r");
-	if (!f)
-	  {
-	    puts("Error! File doesn't exist\n");
-	    return (1);
-	  }
-	int c;
-	while ((c = fgetc(f)) != EOF)
-	  {
-	    putchar(c);
-	  }
-	fclose(f);
+	execvp("/usr/bin/cat", args);
       }
     else if (strcmp(cmd, "help") == 0)
       {
@@ -51,8 +34,12 @@ int analise(char *cmd, char *args)
 	  }
 	else
 	  {
-	    puts("cat\thelp\ttouch\thq9p\nls\tcd\texit\n");
+	    puts("cat\thelp\ttouch\thq9p\nls\tcd\texlite\n");
 	  }
+      }
+    else if (strcmp(cmd, "echo") == 0)
+      {
+	execvp("/usr/bin/echo", args);
       }
     else if (strcmp(cmd, "info") == 0)
       {
@@ -68,7 +55,7 @@ int analise(char *cmd, char *args)
 	  }
 	else
 	  {
-	    FILE *f = fopen(args, "w");
+	    mknod(args, 077, 0);
 	    printf("File %s was successfuly created\n", args);
 	    fclose(f);
 	  }
@@ -85,11 +72,8 @@ int analise(char *cmd, char *args)
     else if (strcmp(cmd, "ls") == 0)
       {
 	if (args[0] == '\0')
-	  {
-	    ls(".",0,0);
-	  }
-	else
-	  ls(args,0,0);
+	  args[0] = '.';
+	execvp("/usr/bin/ls", args);
       }
     else if (strcmp(cmd, "exit") == 0)
       {
