@@ -41,7 +41,6 @@ int main(void)
       default:
 	printf("%c - WTF?!", c);
 	break;
-      
     }
   putchar('\n');
   return (0);

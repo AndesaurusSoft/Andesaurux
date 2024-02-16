@@ -5,7 +5,7 @@
 */
 typedef unsigned mode_t;
 int fork();
-int exit(timer);
+int exit(value);
 int sleep(sec);
 int mount(source, target, filesystemtype, mountflags, data);     
 int execl(path, arg, ...);
@@ -36,5 +36,4 @@ int kill(pid, sig);
 int rmdir(path);
 int print(str);
 int infiniteloop();
-int panic(fmt);
 int oops(pid, fmt, num);
