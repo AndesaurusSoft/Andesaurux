@@ -1,5 +1,6 @@
 #include <stdio.h>
-int exponent(int a, int b)
+typedef long long big;
+big exponent(int a, int b)
 {
       if (b == 0)
       {
@@ -15,29 +16,29 @@ int exponent(int a, int b)
 /* Calculator for Andesaurux operating system */
 int main(void)
 {
-  double a, b = 0;
+  big a, b = 0;
   short int c = 0;
   puts("Enter two numbers:\t");
-  scanf("%lg %lg", &a, &b);
+  scanf("%lld %lld", &a, &b);
   puts("Enter operation symbol:\t");
   getchar();
   c = getchar();
   switch(c)
     {
       case '+':
-	printf("%d+%d=%d", a, b, a+b);
+	printf("%lld+%lld=%lld", a, b, a+b);
 	break;
       case '-':
-	printf("%d-%d=%d", a, b, a-b);
+	printf("%lld-%lld=%lld", a, b, a-b);
 	break;
       case '*':
-	printf("%d*%d=%d", a, b, a*b);
+	printf("%lld*%lld=%lld", a, b, a*b);
 	break;
       case '/':
-	printf("%d/%d=%d", a, b, a/b);
+	printf("%lld/%lld=%lld", a, b, a/b);
 	break;
       case '^':
-      printf("%d^%d=%d", a, b, exponent(a, b));
+      printf("%lld^%lld=%lld", a, b, exponent(a, b));
       default:
 	printf("%c - WTF?!", c);
 	break;

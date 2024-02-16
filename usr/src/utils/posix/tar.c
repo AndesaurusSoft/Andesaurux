@@ -7,9 +7,11 @@
 int createtar(char *dest, char *file)
 {
     FILE *f = fopen(dest, "w");
-    FILE *f2 = fopen(files[1], "r");
+    FILE *f2 = fopen(file, "r");
     fprintf(f, "Name: %s\n", file);
-    fprintf(f, "Size: %d\n", strlen(fopen(file, "r")));
+    char file2c[32767] = {0};
+    fgets(file2c, 32767, f2);
+    fprintf(f, "Size: %lu\n", strlen(file2c));
     int c;
     while ((c = getc(f2)) != EOF)
     {
@@ -21,7 +23,9 @@ int createtar(char *dest, char *file)
 int extract(char *dest, char *tarball)
 {
     FILE *f = fopen(tarball, "r");
-    mkdir(dest, 0777);
+    char command[256] = "mkdir ";
+    strcat(command, dest);
+    system(command);
     int c;
     while ((c = getc(f)) != EOF)
     {

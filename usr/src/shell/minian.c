@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#define SECRET "\0106\0125\0103\0113"
 #include "hq9p.c"
 /*
 * This is a shell for Andesaurux.
@@ -12,25 +13,17 @@
 */
 /*Analyser*/
 void ls (char *path, int a, int b);
-int analise(char *cmd, char *args)
+int analise(char *cmd, char **args)
   {
     if (strcmp(cmd, "cat") == 0)
       {
-	execvp("/usr/bin/cat", args);
+	execvp("/usr/bin/cat", &args[0]);
       }
     else if (strcmp(cmd, "help") == 0)
       {
-	if (strcmp(args, "--minian") == 0)
+	if (strcmp(args[0], SECRET) == 0)
 	  {
-	    puts("Minian is a free shell made by Anatoliy6463 in 2024\nIt is protected by AFL\n");
-	  }
-	else if (strcmp(args, "--andesaurux") == 0)
-	  {
-	    puts("Andesaurux is a fully free OS made by Anatoliy6463 in 2024\nIt is protected by AFL\n");
-	  }
-	else if (strcmp(args, "--afl") == 0)
-	  {
-	    puts("AFL is short for Andesaurus Free License, it is a copyleft license\n");
+	    puts("What?\n");
 	  }
 	else
 	  {
@@ -39,7 +32,7 @@ int analise(char *cmd, char *args)
       }
     else if (strcmp(cmd, "echo") == 0)
       {
-	execvp("/usr/bin/echo", args);
+	execvp("/usr/bin/echo", &args[0]);
       }
     else if (strcmp(cmd, "info") == 0)
       {
@@ -48,32 +41,35 @@ int analise(char *cmd, char *args)
     else if (strcmp(cmd, "touch") == 0)
       {
 	puts("Creating the file...\n");
-	if (fopen(args, "r") != NULL)
+	if (fopen(args[0], "r") != NULL)
 	  {
 	    puts("File already exists\n");
 	    perror("File already exists");
 	  }
 	else
 	  {
-	    mknod(args, 077, 0);
-	    printf("File %s was successfuly created\n", args);
-	    fclose(f);
+	    mknod(args[0], 077, 0);
+	    printf("File %s was successfuly created\n", args[0]);
 	  }
       }
     else if (strcmp(cmd, "hq9p") == 0)
       {
-	char *filename = args;
+	char *filename = args[0];
 	hq9open(filename);
+      }
+    else if (strcmp(cmd, "f") == 0)
+      {
+	puts(SECRET);
       }
     else if (strcmp(cmd, "cd") == 0)
       {
-	chdir(args);
+	chdir(args[0]);
       }
     else if (strcmp(cmd, "ls") == 0)
       {
-	if (args[0] == '\0')
-	  args[0] = '.';
-	execvp("/usr/bin/ls", args);
+	if (args[0][0] == '\0')
+	  args[0][0] = '.';
+	execvp("/usr/bin/ls", args[0]);
       }
     else if (strcmp(cmd, "exit") == 0)
       {
@@ -103,24 +99,27 @@ void ls(char *path, int a, int b)
     }
 }
 /*I plan creating more commands, but that's all for today*/
-void loop(char *s, char *cmd, char *args)
+void loop(char *s, char *cmd, char **args)
 {
   int argsstart = 0;
   puts("$\t");
   fgets(s, 1023, stdin);
-  if (s[0] != '\n')
+  for (int i = 0; i < 256; i++)
     {
-      char *token = strtok(s, " \n");
-      if (token != NULL) 
+      if (s[0] != '\n')
         {
-          strcpy(cmd, token);
-          token = strtok(NULL, "\n");
+          char *token = strtok(s, " \n");
           if (token != NULL) 
             {
-              strcpy(args, token);
+              strcpy(cmd, token);
+              token = strtok(NULL, "\n");
+              if (token != NULL) 
+                {
+                  strcpy(args[i], token);
+                }
             }
+          analise(cmd, args);
         }
-      analise(cmd, args);
     }
   putchar('\n');
 }
@@ -128,7 +127,7 @@ int main()
 {
   char s[1024] = {0};
   char cmd[1024] = {0};
-  char args[1024] = {0};
+  char *args[1024] = {0};
   for (;;)
     loop(s, cmd, args);
   return (0);
