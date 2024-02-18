@@ -6,6 +6,8 @@ No, but it will also be Unix-compatible and i took some libraries from old Linux
 # Will it be fully FLOSS? 
 Yes, i will not use proprietary firmware or make blobs, every line of code will be fully free.
 ## For manifesto, look at manifesto.md
+
+### LAST RELEASE: v0.0.1.0-pre1 18 February 2024
 <img src="logo.png" alt="logo" width="1024"/>
 
 Copyright (C)  2024  AnatoliyL and contributors.
