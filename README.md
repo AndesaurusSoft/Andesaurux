@@ -7,7 +7,6 @@ No, but it will also be Unix-compatible and i took some libraries from old Linux
 Yes, i will not use proprietary firmware or make blobs, every line of code will be fully free.
 ## For manifesto, look at manifesto.md
 <img src="logo.png" alt="logo" width="1024"/>
-# All the software is protected by Apache License 2.0
 
 Copyright (C)  2024  AnatoliyL and contributors.
     Permission is granted to copy, distribute and/or modify this document
