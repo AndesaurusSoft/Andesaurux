@@ -1,4 +1,5 @@
 /* VGA colors */
+
 enum VGAColor 
 {
     VGA_COLOR_BLACK = 0,
@@ -18,16 +19,17 @@ enum VGAColor
     VGA_COLOR_YELLOW = 14,
     VGA_COLOR_WHITE = 15,
 };
-
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
 
-volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
+volatile short* vga_buffer = (short*)0xB8000;
 
 vga_clear_screen() 
 {
-    for (int y = 0; y < VGA_HEIGHT; y++) {
-        for (int x = 0; x < VGA_WIDTH; x++) {
+    for (int y = 0; y < VGA_HEIGHT; y++) 
+    {
+        for (int x = 0; x < VGA_WIDTH; x++) 
+        {
             const int index = y * VGA_WIDTH + x;
             vga_buffer[index] = ' ' | (VGA_COLOR_BLACK << 8);
         }

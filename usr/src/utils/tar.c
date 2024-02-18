@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     {
         puts("Not enough arguments\n");
     }
-    else if (strcmp(argv[1], "-c") == 0)
+    else if (strstr(argv[2], "c"))
     {
         for (int i = 2; i <= argc; i++)
         {
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         }
         puts("Done\n");
     }
-    else if (strcmp(argv[1], "-x") == 0)
+    else if (strstr(argv[1], "x"))
     {
         puts("Not done yet\n\007");
     }

@@ -10,7 +10,7 @@ int main(int argc, char **argv)
   if (argc < 3)
     {
       puts("NOT ENOUGH ARGUMENTS, SYSTEM HALTED!\n");
-      return ('F');
+      return (-1);
     }
   for (int i = 0; i < strlen(argv[1]); i++)
     {

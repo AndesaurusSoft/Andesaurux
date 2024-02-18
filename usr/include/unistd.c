@@ -2,6 +2,8 @@
 #include "unistd.h"
 #include "stdarg.h"
 #include "stdlib.h"
+#include "string.h"
+#include <lib/drivers/vga.c>
 execl(path, arg, ...)
 const char *path;
 const char *arg;
@@ -426,14 +428,16 @@ char *path;
     );
 }
 
-int print(str)
+int print(str, color)
+short color;
 char *str;
 {
-    while(*str)
+    for (int i = 0; str[i] != '\0'; i++)
     {
-        putchar(*str);
+        vga_write_char(str[i], color, 80, 25);
     }
 }
+
 
 int infiniteloop()
 {
