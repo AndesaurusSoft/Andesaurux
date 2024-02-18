@@ -1,5 +1,5 @@
 bits 16
-; I will translate this to ARM assembly :)
+
 section bootloader
     cli
     xor ax, ax

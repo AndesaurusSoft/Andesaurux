@@ -1,7 +1,8 @@
 #include "stdio.h"
 #include "time.h"
+#include "sizet.h"
 /*
-*   Copyright (C) 2024 Anatoliy6463
+*   Copyright (C) 2024 AnatoliyL
 */
 typedef unsigned mode_t;
 int fork();

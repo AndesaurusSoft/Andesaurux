@@ -1,2 +1,0 @@
-Andesaurux is a simple, yet powerful OS with microkernel, pkgm package manager and Minian shell
-ANDESAURUX IS A FREE SOFTWARE THAT COMES WITHOUT WARRANTIES OF ANY KIND

@@ -1,5 +1,7 @@
 #ifndef STDIO_H
 #define STDIO_H
+#ifndef __STDIO_H_
+#define __STDIO_H_
 /*
 *   Copyright (C) 2024 Anatoliy6463
 */

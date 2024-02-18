@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#define SECRET "\0106\0125\0103\0113"
+#define SECRET "\106\125\103\113"
 #include "hq9p.c"
 /*
 * This is a shell for Andesaurux.

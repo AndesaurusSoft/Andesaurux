@@ -1,6 +1,0 @@
-So, you want to use Andesaurux but don't know how to download it?
-1.  Install git
-2.  Type git clone https://github.com/Anatoliy6463/Andesaurux.git
-3.  Type git checkout -b stable to switch from experimental to stable version (unnecessary, but recomended)
-4.  Enter ~/Andesaurux and type make to compile Andesaurux
-Wait a minute and you are done!
