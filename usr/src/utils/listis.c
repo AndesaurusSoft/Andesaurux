@@ -6,7 +6,7 @@ void deleten(char *bar)
 {
   bar[strlen(bar) - 1] = '\0';
 }
-int main(int argc, char **argv)
+int main(void)
 {
   puts("\t\tListis\tCopyright (C) 2024 AnatoliyL\n");
   puts("This program comes with ABSOLUTELY NO WARRANTY\nThis is free software, and you are welcome to redistribute it under GNU GPL license conditions\n");
@@ -16,17 +16,22 @@ int main(int argc, char **argv)
   int v = getchar();
   if (v == 'o')
     {
-      FILE *f = fopen(argv[1], "r");
+      char name[512];
+      fgets(name, 512, stdin);
+      deleten(name);
+      FILE *f = fopen(name, "r");
       if (!f)
         {
-          puts("Error! The file doesn't exist or there was no argument\n");
+          puts("Error! The file doesn't exist!\n");
           return (1);
         }
       else
         {
-          char command[256] = "cat ";
-	  strcat(command, argv[1]);
-	  system(command);
+          int c = 0;
+	  while ((c = getc(f)) != EOF)
+	    {
+              putchar(c);
+            }
 	  putchar('\n');
         }
       return (0);
@@ -55,7 +60,6 @@ int main(int argc, char **argv)
     {
       fputs(ls[i], f);
     }
-  puts("To watch your list, type \'./main <name>\'");
   fclose(f);
   return (0);
 }
