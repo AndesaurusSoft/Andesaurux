@@ -73,25 +73,6 @@ int analise(char *cmd, char **args)
       puts("Command not found!\nType \"Help\" for list of commands\n");
     return (0);
   }
-void ls(char *path, int a, int b)
-{
-  struct dirent *d;
-  DIR *dh = opendir(path);
-  if (!dh)
-    {
-      perror("Directory doesn't exist\n");
-    }
-  else
-    {
-      while ((d = readdir(dh)) != NULL)
-	{
-		if (!a && d->d_name[0] == '.')
-			continue;
-		printf("%s  ", d->d_name);
-		if(b) printf("\n");
-	}
-    }
-}
 /*I plan creating more commands, but that's all for today*/
 void loop(char *s, char *cmd, char **args)
 {
