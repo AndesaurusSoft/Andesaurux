@@ -63,7 +63,7 @@ int analise(char *cmd, char **args)
       {
 	if (args[0][0] == '\0')
 	  args[0][0] = '.';
-	execvp("/usr/bin/ls", args[0]);
+	execvp("ls", &args[0]);
       }
     else if (strcmp(cmd, "exit") == 0)
       {
