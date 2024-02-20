@@ -9,11 +9,12 @@ void deleten(char *bar)
 }
 int main(int argc, char **argv)
 {
-  if (argc > 1)
-    {
-      FILE *new = fopen(argv[1], "w");
-      fclose(new);
-    }
+	if (argc < 2)
+		{
+			return (-1);
+		}
+  FILE *new = fopen(argv[1], "w");
+  fclose(new);
   char ls[4096][4096] = {0};
   for (int i = 0; i < 256; i++)
     {
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
     {
       FILE *f = fopen(argv[1], "r+");
       for (int i = 0; i < 4096; i++)
-	fputs(ls[i], f);
+			fputs(ls[i], f);
       fclose(f);
     }
   return (0);
