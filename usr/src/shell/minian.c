@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #define SECRET "\106\125\103\113"
 #include "hq9p.c"
 /*
@@ -17,22 +18,15 @@ int analise(char *cmd, char **args)
   {
     if (strcmp(cmd, "cat") == 0)
       {
-	execvp("/usr/bin/cat", &args[0]);
+	execvp("cat", &args[0]);
       }
     else if (strcmp(cmd, "help") == 0)
       {
-	if (strcmp(args[0], SECRET) == 0)
-	  {
-	    puts("What?\n");
-	  }
-	else
-	  {
 	    puts("cat\thelp\ttouch\thq9p\nls\tcd\texlite\n");
-	  }
       }
     else if (strcmp(cmd, "echo") == 0)
       {
-	execvp("/usr/bin/echo", &args[0]);
+	execvp("echo", &args[0]);
       }
     else if (strcmp(cmd, "info") == 0)
       {
@@ -48,7 +42,7 @@ int analise(char *cmd, char **args)
 	  }
 	else
 	  {
-	    mknod(args[0], 077, 0);
+	    creat(args[0], 077);
 	    printf("File %s was successfuly created\n", args[0]);
 	  }
       }
