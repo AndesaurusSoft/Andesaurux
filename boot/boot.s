@@ -16,6 +16,10 @@ puts_loop:
     jmp  puts_loop
 puts_loop_exit:
     jmp  puts_loop_exit
+
+boot:
+    jmp main
+
 .balign 512, 0
 finish:
      .fill 510 - (finish - start), 1, 0

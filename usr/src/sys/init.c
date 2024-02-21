@@ -15,13 +15,13 @@ main()
     else if (pid == 0)
     {
         /* Child process */
-        execl("/sbin/daemons/testd.o", "init", (char *)NULL);
+        execvp("/sbin/daemons/minian", "init");
         pid = rand()%CLOCKS_PER_SEC+2;
         waitpid(pid, NULL, 0);
         if (pid == 1)
         {
-	  puts("WTH HAPPENED?!\n");
-	  return (-1);
+            panic("fork failed\n");
+	        return (-1);
         }
     }
     else
