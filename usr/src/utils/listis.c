@@ -36,12 +36,12 @@ int main(void)
         }
       return (0);
     }
-  puts("What do you want to add to list?\n");
+  puts("What do you want to add to list?");
   char ls[256][256] = {0};
   getchar();
   for (int i = 0; i < 256; i++)
     {
-	    puts("> ");
+	    printf("> ");
 	    fgets(ls[i], 255, stdin);
 	    if (strcmp(ls[i], "EOF\n") == 0)
 	      {
@@ -51,7 +51,7 @@ int main(void)
 	        break;
 	      }
     }
-  puts("Name your list:\t");
+  printf("Name your list:\t");
   char name[256] = {0};
   fgets(name, 255, stdin);
   deleten(name);
@@ -63,3 +63,4 @@ int main(void)
   fclose(f);
   return (0);
 }
+

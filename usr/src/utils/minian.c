@@ -6,15 +6,23 @@
 #include <fcntl.h>
 #define SECRET "\106\125\103\113"
 #include "hq9p.c"
+#define true 1
+#define false 0
+#define _ ;
 /*
 * This is a shell for Andesaurux.
 * Minian will be more lighweight than bash and i will write doc for it.
 *
 * Fun fact: this code is written entirely in GNU Emacs :D
+*
+* MiNIAN DEVELOPMENT IS STOPPED! PLEASE USE OTHER UNIX SHELLS LIKE tcsh OR bash
 */
+
+/* Prototypes */
+analise(char *, char **)_
+loop(char *, char *, char **);
 /*Analyser*/
-void ls (char *path, int a, int b);
-int analise(char *cmd, char **args)
+analise(char *cmd, char **args)
   {
     if (strcmp(cmd, "cat") == 0)
       {
@@ -65,6 +73,10 @@ int analise(char *cmd, char **args)
 	  args[0][0] = '.';
 	execvp("ls", &args[0]);
       }
+    else if (strcmp(cmd, "texor") == 0)
+      {
+	execvp("texor", &args[0]);
+      }
     else if (strcmp(cmd, "exit") == 0)
       {
 	exit(0);
@@ -74,7 +86,7 @@ int analise(char *cmd, char **args)
     return (0);
   }
 /*I plan creating more commands, but that's all for today*/
-void loop(char *s, char *cmd, char **args)
+loop(char *s, char *cmd, char **args)
 {
   int argsstart = 0;
   puts("$\t");
@@ -98,7 +110,7 @@ void loop(char *s, char *cmd, char **args)
     }
   putchar('\n');
 }
-int main()
+main()
 {
   char s[1024] = {0};
   char cmd[1024] = {0};

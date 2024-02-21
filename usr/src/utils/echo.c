@@ -4,7 +4,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-  print("%s\n", argv[1]);
+  printf("%s\n", argv[1]);
   return (0);
 }
 /* CANCEL C23 STANDARD!!! */

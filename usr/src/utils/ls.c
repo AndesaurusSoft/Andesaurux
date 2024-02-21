@@ -1,7 +1,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #warning "CANCEL C23 AND PROTECT GCC FROM USING IT!"
-main(path, a, b)
+ls(path, a, b)
 char *path;
 int a;
 int b;
@@ -22,4 +22,10 @@ int b;
                 if(b) printf("\n");
         }
     }
+}
+main(argc, argv)
+int argc;
+char **argv;
+{
+  ls(argv[1], 0, 0);
 }
